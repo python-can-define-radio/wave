@@ -9,8 +9,8 @@ import {sweep} from './sweep.js';
 
 //////////////////////////////////////////////////////////////////////////////
 
-const kNumParticles = 16;
-const kMaxNumParticles = 64;
+const kNumParticles = 1000;
+const kMaxNumParticles = 5000;
 
 const kWaterDelay = 200;
 const kWaterDisplacements = [
@@ -329,7 +329,7 @@ const Physics = (env: TypedEnv): Component<PhysicsState> => ({
     inGrass: false,
     friction: 0,
     restitution: 0,
-    mass: 1,
+    mass: .5,
     autoStep: 0.0625,
     autoStepMax: 0.5,
   }),
@@ -441,6 +441,7 @@ const generateParticles =
     return env.registry.getMaterialData(material).texture;
   })();
   if (!texture) return;
+  
 
   const count = Math.min(kNumParticles, kMaxNumParticles - env.particles);
   env.particles += count;
@@ -449,7 +450,7 @@ const generateParticles =
     const particle = env.entities.addEntity();
     const position = env.position.add(particle);
 
-    const size = Math.floor(3 * Math.random() + 1) / 16;
+    const size = Math.floor(20 * Math.random() + 1) / 16;
     position.x = x + (1 - size) * Math.random() + size / 2;
     position.y = y + (1 - size) * Math.random() + size / 2;
     position.z = z + (1 - size) * Math.random() + size / 2;
@@ -579,7 +580,7 @@ const Movement = (env: TypedEnv): Component<MovementState> => ({
     runningFriction: 0,
     standingFriction: 2,
     airMoveMultiplier: 0.5,
-    airJumps: 0,
+    airJumps: 20,
     jumpTime: 0.2,
     jumpForce: 10,
     jumpImpulse: 7.5,
@@ -1152,7 +1153,7 @@ const main = () => {
   env.inputs.add(player);
   env.target.add(player);
 
-  const follower = addEntity(env, 'follower', size, x, z, 0.75, 0.75, 12, 8, 15, 10);
+  const follower = addEntity(env, 'follower', size, x, z, 0.75, 0.75, 12, 20, 15, 10);
   env.meshes.getX(follower).heading = 0;
   env.pathing.add(follower);
 
