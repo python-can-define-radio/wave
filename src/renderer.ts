@@ -392,6 +392,12 @@ class TextureAtlas {
     for (let i = 0; i < length; i++) {
       pixels[i] = (pixels[i] * color[i & 3]) & 0xff;
     }
+    // // Here goes!!
+    // for (let i = 0; i < pixels.length; i += 4) {
+    //   pixels[i + 3] = 125;
+    //   console.log(pixels[i+3]);
+    //   // pixels[i + 3] = Math.floor(pixels[i + 3] * 0.4); // 30% alpha
+    // } 
 
     const capacity = this.data ? this.data.length : 0;
     const required = length + offset;

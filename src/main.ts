@@ -440,6 +440,7 @@ const generateParticles =
     if (material === kNoMaterial) return;
     return env.registry.getMaterialData(material).texture;
   })();
+  // const texture = new Texture(...);
   if (!texture) return;
   
 
