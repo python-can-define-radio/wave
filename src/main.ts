@@ -489,6 +489,10 @@ const modifyBlock = (env: TypedEnv, x: int, y: int, z: int,
                      block: BlockId, side: int): void => {
   const old_block = env.getBlock(x, y, z);
   env.setBlock(x, y, z, block);
+  for (let coucou = 0; coucou < 20; coucou++) {
+    env.setBlock(x, int(y + coucou), z, block);
+  }
+  console.log(`set block ${x} ${y} ${z}`); // jan3
   const new_block = env.getBlock(x, y, z);
 
   if (env.blocks) {
